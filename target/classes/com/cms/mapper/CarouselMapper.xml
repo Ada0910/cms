@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.mapper.CarouselMapper">
+    <resultMap id="CarouselResult" type="com.cms.pojo.Carousel">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="imageUrl" jdbcType="VARCHAR" property="imageUrl"/>
+        <result column="isUse" jdbcType="INTEGER" property="isUse"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="orderNo" jdbcType="INTEGER" property="orderNo"/>
+        <result column="createUserId" jdbcType="INTEGER" property="createUserId"/>
+        <result column="createDateTime" jdbcType="TIMESTAMP" property="createDateTime"/>
+        <result column="updateDateTime" jdbcType="TIMESTAMP" property="updateDateTime"/>
+
+        <association property="createUser" column="createUserId"
+                     select="com.cms.mapper.UserMapper.findById"></association>
+
+    </resultMap>
+
+    <insert id="add" parameterType="com.cms.pojo.Carousel" useGeneratedKeys="true" keyProperty="id">
+		insert into carousel values(null,#{title},#{url},#{imageUrl},#{isUse},#{type},#{orderNo}
+		,#{createUserId},#{createDateTime},#{updateDateTime});
+	</insert>
+
+    <update id="update" parameterType="com.cms.pojo.Carousel">
+        update carousel
+        <set>
+            <if test="title!=null ">
+                title=#{title},
+            </if>
+            <if test="url!=null  ">
+                url=#{url},
+            </if>
+            <if test="imageUrl!=null">
+                imageUrl=#{imageUrl},
+            </if>
+            <if test="isUse!=null">
+                isUse=#{isUse},
+            </if>
+            <if test="type!=null">
+                type=#{type},
+            </if>
+            <if test="orderNo!=null">
+                orderNo=#{orderNo},
+            </if>
+            <if test="updateDateTime!=null">
+                updateDateTime=#{updateDateTime},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <select id="list" parameterType="Map" resultMap="CarouselResult">
+        select * from carousel
+        <where>
+            <if test="isUse!=null and isUse!='' ">
+                and isUse = #{isUse}
+            </if>
+        </where>
+        order by orderNo
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <select id="index_list" resultMap="CarouselResult">
+        select * from carousel where isUse =1
+        <!-- group by orderNo -->
+        <!-- 		order by orderNo -->
+    </select>
+
+    <select id="getTotal" parameterType="Map" resultType="Integer">
+        select count(*) from carousel
+        <where>
+            <if test="isUse!=null and isUse!='' ">
+                and isUse = #{isUse}
+            </if>
+        </where>
+    </select>
+
+    <delete id="delete" parameterType="Integer">
+		delete from carousel where id=#{id}
+	</delete>
+
+    <select id="findById" parameterType="Integer" resultMap="CarouselResult">
+		select * from carousel where id=#{id}
+	</select>
+
+</mapper>

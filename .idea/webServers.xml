@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="da08f335-8b77-45a6-8938-b518d1be3e99" name="腾讯云tomcat 8.0" url="http://139.199.89.248:8080/">
+        <fileTransfer host="139.199.89.248" port="22" rootFolder="/usr/local/tomcat8/apache-tomcat-8.0.53/webapps" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions controlEncoding="utf-8" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

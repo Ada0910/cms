@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.mapper.MemoMapper">
+
+
+    <resultMap id="MemoResult" type="com.cms.pojo.Memo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="memoClassifyId" jdbcType="INTEGER" property="memoClassifyId"/>
+        <result column="orderNo" jdbcType="INTEGER" property="orderNo"/>
+        <result column="createUserId" jdbcType="INTEGER" property="createUserId"/>
+        <result column="createDateTime" jdbcType="TIMESTAMP" property="createDateTime"/>
+        <result column="updateDateTime" jdbcType="TIMESTAMP" property="updateDateTime"/>
+
+        <association property="memoClassify" column="memoClassifyId"
+                     select="com.cms.mapper.MemoClassifyMapper.findById"></association>
+        <association property="createUser" column="createUserId"
+                     select="com.cms.mapper.UserMapper.findById"></association>
+
+    </resultMap>
+    <insert id="add" parameterType="com.cms.pojo.Memo">
+		insert into memo values(null,#{title},#{content},#{memoClassifyId},#{orderNo},#{createUserId},#{createDateTime},#{updateDateTime});
+	</insert>
+
+    <update id="update" parameterType="com.cms.pojo.Memo">
+        update memo
+        <set>
+            <if test="title!=null ">
+                title=#{title},
+            </if>
+            <if test="content!=null  ">
+                content=#{content},
+            </if>
+            <if test="memoClassifyId!=null  ">
+                memoClassifyId=#{memoClassifyId},
+            </if>
+            <if test="orderNo!=null">
+                orderNo=#{orderNo},
+            </if>
+            <if test="createUserId!=null">
+                createUserId=#{createUserId},
+            </if>
+            <if test="updateDateTime!=null">
+                updateDateTime=#{updateDateTime},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="list" parameterType="Map" resultMap="MemoResult">
+        select * from memo
+        <where>
+            <if test="q!=null and q!=''">
+                and (title like #{q} or content like #{q})
+            </if>
+            <if test="memoClassifyId!=null and memoClassifyId!='' ">
+                and memoClassifyId = #{memoClassifyId}
+            </if>
+        </where>
+        order by orderNo
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <select id="getTotal" parameterType="Map" resultType="Integer">
+        select count(*) from memo
+        <where>
+            <if test="q!=null and q!=''">
+                and (title like #{q} or content like #{q})
+            </if>
+            <if test="memoClassifyId!=null and memoClassifyId!='' ">
+                and memoClassifyId = #{memoClassifyId}
+            </if>
+        </where>
+    </select>
+
+    <delete id="delete" parameterType="Integer">
+		delete from memo where id=#{id}
+	</delete>
+
+
+    <select id="findById" parameterType="Integer" resultMap="MemoResult">
+		select * from memo where id=#{id}
+	</select>
+</mapper>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.mapper.BlogMapper">
+    <resultMap id="BlogResult" type="com.cms.pojo.Blog">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="summary" jdbcType="VARCHAR" property="summary"/>
+        <result column="thumbnailImage" jdbcType="VARCHAR" property="thumbnailImage"/>
+        <result column="keywords" jdbcType="VARCHAR" property="keywords"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="clickHit" jdbcType="INTEGER" property="clickHit"/>
+        <result column="replyHit" jdbcType="INTEGER" property="replyHit"/>
+        <result column="displayMode" jdbcType="INTEGER" property="displayMode"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="createUserId" jdbcType="INTEGER" property="createUserId"/>
+        <result column="blogClassifyId" jdbcType="INTEGER" property="blogClassifyId"/>
+        <result column="isUse" jdbcType="INTEGER" property="isUse"/>
+        <result column="createDateTime" jdbcType="TIMESTAMP" property="createDateTime"/>
+        <result column="updateDateTime" jdbcType="TIMESTAMP" property="updateDateTime"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+        <result column="contentNoTag" jdbcType="LONGVARCHAR" property="contentNoTag"/>
+        <association property="blogClassify" column="blogClassifyId"
+                     select="com.cms.mapper.BlogClassifyMapper.findById"></association>
+        <association property="createUser" column="createUserId"
+                     select="com.cms.mapper.UserMapper.findById"></association>
+    </resultMap>
+
+    <resultMap type="com.cms.pojo.Blog" id="BlogResult2">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="createDateTime" column="createDateTime"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.cms.pojo.Blog" useGeneratedKeys="true" keyProperty="id">
+		insert into blog values(null,#{title},#{content},#{contentNoTag},#{summary},#{thumbnailImage},#{keywords}
+		,#{description},#{clickHit},#{replyHit},#{displayMode},#{url},#{createUserId},#{blogClassifyId},#{isUse},#{createDateTime},#{updateDateTime});
+	</insert>
+
+    <update id="update" parameterType="com.cms.pojo.Blog">
+        update blog
+        <set>
+            <if test="title!=null ">
+                title=#{title},
+            </if>
+            <if test="content!=null  ">
+                content=#{content},
+            </if>
+            <if test="contentNoTag!=null">
+                contentNoTag=#{contentNoTag},
+            </if>
+            <if test="summary!=null">
+                summary=#{summary},
+            </if>
+            <if test="thumbnailImage!=null ">
+                thumbnailImage=#{thumbnailImage},
+            </if>
+            <if test="keywords!=null  ">
+                keywords=#{keywords},
+            </if>
+            <if test="description!=null">
+                description=#{description},
+            </if>
+            <if test="clickHit!=null">
+                clickHit=#{clickHit},
+            </if>
+            <if test="replyHit!=null">
+                replyHit=#{replyHit},
+            </if>
+            <if test="displayMode!=null">
+                displayMode=#{displayMode},
+            </if>
+
+            <if test="url!=null">
+                url=#{url},
+            </if>
+
+            <if test="blogClassifyId!=null">
+                blogClassifyId=#{blogClassifyId},
+            </if>
+            <if test="isUse!=null">
+                isUse=#{isUse},
+            </if>
+            <if test="updateDateTime!=null">
+                updateDateTime=#{updateDateTime},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="list" parameterType="Map" resultMap="BlogResult">
+        select * from blog
+        <where>
+            <if test="q!=null and q!=''">
+                and (title like #{q} or contentNoTag like #{q} or keywords like #{q} or description like #{q} )
+            </if>
+            <if test="blogClassifyId!=null and blogClassifyId!='' ">
+                and blogClassifyId = #{blogClassifyId}
+            </if>
+            <if test="isUse!=null and isUse!='' ">
+                and isUse = #{isUse}
+            </if>
+        </where>
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+
+    <select id="list2" parameterType="Map" resultMap="BlogResult2">
+        select id,title,createDateTime from blog
+        <where>
+            <if test="q!=null and q!=''">
+                and (title like #{q} or contentNoTag like #{q} or keywords like #{q} or description like #{q} )
+            </if>
+            <if test="blogClassifyId!=null and blogClassifyId!='' ">
+                and blogClassifyId = #{blogClassifyId}
+            </if>
+            <if test="isUse!=null and isUse!='' ">
+                and isUse = #{isUse}
+            </if>
+        </where>
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+
+    <select id="getTotal" parameterType="Map" resultType="Integer">
+        select count(*) from blog
+        <where>
+            <if test="q!=null and q!=''">
+                and (title like #{q} or contentNoTag like #{q} or keywords like #{q} or description like #{q})
+            </if>
+            <if test="blogClassifyId!=null and blogClassifyId!='' ">
+                and blogClassifyId = #{blogClassifyId}
+            </if>
+            <if test="isUse!=null and isUse!='' ">
+                and isUse = #{isUse}
+            </if>
+        </where>
+    </select>
+
+    <delete id="delete" parameterType="Integer">
+		delete from blog where id=#{id}
+	</delete>
+
+    <select id="findById" parameterType="Integer" resultMap="BlogResult">
+		select * from blog where id=#{id}
+	</select>
+
+</mapper>

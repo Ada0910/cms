@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.mapper.ConfigMapper">
+    <resultMap id="ConfigResult" type="com.cms.pojo.Config">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="webName" jdbcType="VARCHAR" property="webName"/>
+        <result column="stationName" jdbcType="VARCHAR" property="stationName"/>
+        <result column="webSite" jdbcType="VARCHAR" property="webSite"/>
+        <result column="backstageLogo" jdbcType="VARCHAR" property="backstageLogo"/>
+        <result column="publicNumber" jdbcType="VARCHAR" property="publicNumber"/>
+        <result column="personalCode" jdbcType="VARCHAR" property="personalCode"/>
+        <result column="logo" jdbcType="VARCHAR" property="logo"/>
+        <result column="indexPageTitle" jdbcType="VARCHAR" property="indexPageTitle"/>
+        <result column="indexPageKeywords" jdbcType="VARCHAR" property="indexPageKeywords"/>
+        <result column="indexPageDescription" jdbcType="VARCHAR" property="indexPageDescription"/>
+        <result column="record" jdbcType="VARCHAR" property="record"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result property="headStr" column="headStr"/>
+        <result property="layuiStr" column="layuiStr"/>
+        <result property="countStr" column="countStr"/>
+        <result column="foodInfo" property="foodInfo"/>
+        <result column="navStr" property="navStr"/>
+    </resultMap>
+
+    <update id="update" parameterType="Config">
+        update config
+        <set>
+            <if test="webName!=null    ">
+                webName=#{webName},
+            </if>
+            <if test="stationName!=null    ">
+                stationName=#{stationName},
+            </if>
+            <if test="webSite!=null    ">
+                webSite=#{webSite},
+            </if>
+            <if test="headStr!=null ">
+                headStr=#{headStr},
+            </if>
+            <if test="layuiStr!=null ">
+                layuiStr=#{layuiStr},
+            </if>
+            <if test="countStr!=null ">
+                countStr=#{countStr},
+            </if>
+            <if test="backstageLogo!=null ">
+                backstageLogo=#{backstageLogo},
+            </if>
+            <if test="publicNumber!=null  ">
+                publicNumber=#{publicNumber},
+            </if>
+            <if test="personalCode!=null    ">
+                personalCode=#{personalCode},
+            </if>
+            <if test="logo!=null    ">
+                logo=#{logo},
+            </if>
+            <if test="indexPageTitle!=null    ">
+                indexPageTitle=#{indexPageTitle},
+            </if>
+            <if test="indexPageKeywords!=null    ">
+                indexPageKeywords=#{indexPageKeywords},
+            </if>
+            <if test="indexPageDescription!=null ">
+                indexPageDescription=#{indexPageDescription},
+            </if>
+            <if test="record!=null ">
+                record=#{record},
+            </if>
+            <if test="version!=null ">
+                version=#{version},
+            </if>
+            <if test="foodInfo!=null ">
+                foodInfo=#{foodInfo},
+            </if>
+            <if test="navStr!=null ">
+                navStr=#{navStr},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="findById" parameterType="Integer" resultMap="ConfigResult">
+		select * from config where id=#{id}
+	</select>
+</mapper>

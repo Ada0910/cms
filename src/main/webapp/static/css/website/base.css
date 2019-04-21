@@ -1,0 +1,201 @@
+/*�������� */
+.wrap {
+    min-width: 1200px;
+}
+
+.wrap .model {
+    background-color: black;
+}
+
+.wrap .model .content {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.blog_title {
+    text-align: center;
+    color: #00a786;
+    font-size: 28px;
+    height: 1.1em;
+    line-height: 1.1em;
+    padding-top: 40px;
+    margin-bottom: 12px;
+    font-weight: 400;
+}
+
+.blog_content {
+    padding: 10px 15px 0px 15px;
+
+}
+
+.blog_content img {
+    max-width: 100%;
+    cursor: crosshair;
+}
+
+/*�������� */
+
+/* ҳ��ײ�css  ҵ�� ��������  ��ϵ����  ��Ϊinfo */
+.food_info {
+    margin-bottom: 20px;
+}
+
+.food_info_item {
+    vertical-align: top;
+    display: inline-block;
+    width: 200px;
+}
+
+.food_info_item h3 {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+.food_info_item a {
+    color: #848282;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.food_info_item a:hover {
+    text-decoration: underline;
+}
+
+.food_info_item .pic_div {
+    width: 150px;
+}
+
+.food_info_item .pic_div img {
+    width: 50%;
+    padding-left:50px;
+}
+
+.link_list {
+
+}
+
+.link_list a {
+    white-space: nowrap;
+    color: #848282;
+    line-height: 33px;
+    padding: 0px 11px 0px 11px;
+}
+
+.link_list a:hover {
+    text-decoration: underline;
+}
+
+/* ���� ����  css */
+
+/* ����ģ�� */
+.base_module {
+    width: 390px;
+    float: left;
+    margin-right: 7px;
+    border-radius: 5px;
+    margin-bottom: 7px;
+}
+
+.m-tab {
+    padding: 12px 15px;
+    position: relative;
+    background-color: #FFF;
+    border-radius: 5px;
+    margin-top: 50px;
+}
+
+.m-tab-title {
+    border-bottom: 1px solid #EAEAEA;
+    overflow: hidden;
+}
+
+.m-tab-title h1 {
+    display: inline-block;
+    border-bottom: 3px solid #00a786;
+    height: 32px;
+    line-height: 40px;
+    font-size: 24px;
+    float: left;
+    margin-bottom: -1px;
+}
+
+.m-tab-title-act {
+    float: right;
+    display: inline;
+    margin-top: 4px;
+}
+
+.m-tab-title-act a {
+    padding-left: 14px;
+    position: relative;
+    margin-left: 10px;
+    height: 25px;
+    color: #00a786;
+    font-size: 24px;
+}
+
+.m-tab-title-act i {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -6px;
+    width: 11px;
+    height: 11px;
+    font-size: 0;
+    background-image: url(/static/images/pc/base/global.png);
+    background-position: -182px -64px;
+}
+
+.m-tab-title-act:HOVER a {
+    color: #00a786;
+}
+
+.m-tab-title-act:hover i {
+    background-position: -182px -79px;
+}
+
+.m-tab-content {
+    min-height: 312px;
+}
+
+.m-tab-content ul {
+    padding: 12px 0 0;
+}
+
+.m-tab-content ul li {
+   /* height: 60px;*/
+    line-height: 30px;
+    padding-left: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.m-tab-content ul li i {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    background-color: #00a786;
+    margin-top: -2px;
+}
+
+.m-tab-content span {
+    float: right;
+    font-size: 12px;
+    color: #999;
+    margin-left: 9px;
+}
+
+.m-tab-content a {
+    height: 30px !important;
+    overflow: hidden !important;
+}
+
+.m-tab-content a:HOVER {
+    text-decoration: underline !important;
+    color: #00a786 !important;
+}
+
