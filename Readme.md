@@ -22,10 +22,13 @@ SSM(Spring + Mybatis + Spring Mvc)+LayUI 框架+UEditor(百度)+JQuery EasyUI
 - git clone下来项目,导入到idea,配置tomcat
 -debug可以看到运行效果
 # 4. 运行效果
+
 - 首页
+
 ![](_v_images/_1569656630_1917.png)
 ![](_v_images/_1569656642_23365.png)
 ![](_v_images/_1569656654_32198.png)
+
 - 后台页面
 ![](_v_images/_1569656686_4067.png)
 ![](_v_images/_1569656242_18496.jpg)
